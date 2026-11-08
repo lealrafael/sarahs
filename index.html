@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sarah's Collection — Coleções Exclusivas</title>
+    <meta name="description" content="Conheça as coleções digitais da Sarah.">
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: #090408;
+            color: white;
+            font-family: Arial, sans-serif
+        }
+
+        .page {
+            max-width: 1024px;
+            margin: auto;
+            position: relative;
+            box-shadow: 0 0 80px #51002744
+        }
+
+        .art {
+            display: block;
+            width: 100%;
+            height: auto
+        }
+
+        .hotspot {
+            position: absolute;
+            display: block;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 40px
+        }
+
+        .hotspot:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 2px
+        }
+
+        .hotspot:hover {
+            background: #ff006911
+        }
+
+        .price-fix {
+            position: absolute;
+            left: 38.5%;
+            top: 88.782%;
+            width: 23%;
+            height: 4.15%;
+            background: linear-gradient(100deg, #22040f 0%, #320716 60%, #330516 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(15px, 4.4vw, 45px);
+            font-weight: 900;
+            color: #f35c9d;
+            letter-spacing: -1px;
+            text-shadow: 0 0 9px #f5007355;
+            pointer-events: none
+        }
+
+        .note {
+            max-width: 1024px;
+            margin: 12px auto 28px;
+            padding: 0 16px;
+            color: #9b8c95;
+            font-size: 12px;
+            text-align: center
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: #000b;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 5
+        }
+
+        .modal.show {
+            display: flex
+        }
+
+        .dialog {
+            width: min(440px, 100%);
+            background: #1b0a14;
+            border: 1px solid #fa1681;
+            border-radius: 20px;
+            padding: 26px;
+            text-align: center;
+            box-shadow: 0 0 40px #ed007b33
+        }
+
+        .dialog h2 {
+            margin-top: 0
+        }
+
+        .dialog button {
+            background: #f50073;
+            border: 0;
+            color: white;
+            border-radius: 30px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        .dialog p {
+            line-height: 1.5;
+            color: #e7cbd8
+        }
+
+        @media(min-width:1025px) {
+            .price-fix {
+                font-size: 45px
+            }
+        }
+
+        @media(max-width:600px) {
+            .price-fix {
+                letter-spacing: -.5px
+            }
+        }
+
+        .reviews-reference {
+            max-width: 1024px;
+            margin: 0 auto;
+            background: #090408
+        }
+
+        .reviews-reference img {
+            width: 100%;
+            height: auto;
+            display: block
+        }
+
+        .reviews-reference p {
+            text-align: center;
+            font-size: 11px;
+            color: #a8979e;
+            margin: 4px 0 15px
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page" aria-label="Sarah's Collection"><img class="art" src="assets/layout-original.png"
+            alt="Sarah's Collection: quatro coleções digitais, preços e oferta de combo" width="1024" height="1346">
+        <div class="price-fix" aria-label="Combo R$ 32,90">R$ 32,90</div>
+        <a class="hotspot" style="left:77%;top:1.141%;width:21%;height:3%" href="#colecoes"
+            aria-label="Acessar coleções"></a><a class="hotspot" style="left:5%;top:30.811%;width:34%;height:4%"
+            href="#colecoes" aria-label="Ver coleções"></a>
+        <div id="colecoes" style="position:absolute;top:39%"></div>
+        <button class="hotspot buy" data-name="Pack Pés" data-price="R$ 9,90"
+            style="left:5%;top:72.235%;width:21%;height:3%" aria-label="Comprar Pack Pés"></button><button
+            class="hotspot buy" data-name="Pack Mãos" data-price="R$ 6,90"
+            style="left:29%;top:72.235%;width:20%;height:3%" aria-label="Comprar Pack Mãos"></button><button
+            class="hotspot buy" data-name="Pack Coxas" data-price="R$ 12,90"
+            style="left:53%;top:72.235%;width:20%;height:3%" aria-label="Comprar Pack Coxas"></button><button
+            class="hotspot buy" data-name="Pack Especial" data-price="R$ 21,90"
+            style="left:77%;top:72.235%;width:20%;height:3%" aria-label="Comprar Pack Especial"></button><button
+            class="hotspot buy" data-name="Combo Completo" data-price="R$ 32,90"
+            style="left:61%;top:89.809%;width:35%;height:3.4%"
+            aria-label="Comprar Combo Completo por R$ 32,90"></button>
+    </main>
+    <section class="reviews-reference" aria-label="Comentários ilustrativos"><img
+            src="assets/comentarios-referencia.jpg" alt="Exemplo visual da seção de comentários" width="1333"
+            height="536">
+        <p>Depoimentos dde nossos clientes.</p>
+    </section>
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="dialog">
+            <h2 id="modal-title"></h2>
+            <p id="modal-text"></p>
+            <p>O checkout ainda não foi configurado. Substitua a ação deste botão pelo link de pagamento correspondente
+                da Cakto.</p><button id="close">Fechar</button>
+        </div>
+    </div>
+    <script>const modal = document.getElementById('modal'); document.querySelectorAll('.buy').forEach(b => b.addEventListener('click', () => {document.getElementById('modal-title').textContent = b.dataset.name; document.getElementById('modal-text').textContent = 'Valor: ' + b.dataset.price; modal.classList.add('show')})); document.getElementById('close').onclick = () => modal.classList.remove('show'); modal.addEventListener('click', e => {if (e.target === modal) modal.classList.remove('show')}); document.addEventListener('keydown', e => {if (e.key === 'Escape') modal.classList.remove('show')});</script>
+</body>
+
+</html>
