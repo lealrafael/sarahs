@@ -86,6 +86,39 @@
             transform: translateY(-1px);
         }
 
+
+        /* Combo: mesmo CTA destacado dos packs, sem alterar o hotspot */
+        .hotspot.buy[data-product="combo"] {
+            background: linear-gradient(180deg, #ff268d 0%, #f50073 52%, #c9005b 100%);
+            border: 1px solid #ff3e9b;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .45em;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-weight: 900;
+            font-size: clamp(11px, 2.15vw, 23px);
+            letter-spacing: .045em;
+            white-space: nowrap;
+            box-shadow: inset 0 1px 2px #ffffff66, 0 0 13px #f5007355;
+            transition: filter .15s ease, transform .15s ease;
+        }
+        .hotspot.buy[data-product="combo"]::before {
+            content: "🛒";
+            font-size: 1.05em;
+            line-height: 1;
+        }
+        .hotspot.buy[data-product="combo"]::after {
+            content: "COMPRAR";
+        }
+        .hotspot.buy[data-product="combo"]:hover {
+            background: linear-gradient(180deg, #ff4ba4 0%, #ff007a 100%);
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
         .price-fix {
             position: absolute;
             left: 38.5%;
