@@ -165,15 +165,15 @@
             aria-label="Acessar coleções"></a><a class="hotspot" style="left:5%;top:30.811%;width:34%;height:4%"
             href="#colecoes" aria-label="Ver coleções"></a>
         <div id="colecoes" style="position:absolute;top:39%"></div>
-        <button class="hotspot buy" data-name="Pack Pés" data-price="R$ 9,90"
+        <button class="hotspot buy" data-product="pes" data-name="Pack Pés" data-price="R$ 9,90"
             style="left:5%;top:72.235%;width:21%;height:3%" aria-label="Comprar Pack Pés"></button><button
-            class="hotspot buy" data-name="Pack Mãos" data-price="R$ 6,90"
+            class="hotspot buy" data-product="maos" data-name="Pack Mãos" data-price="R$ 6,90"
             style="left:29%;top:72.235%;width:20%;height:3%" aria-label="Comprar Pack Mãos"></button><button
-            class="hotspot buy" data-name="Pack Coxas" data-price="R$ 12,90"
+            class="hotspot buy" data-product="coxas" data-name="Pack Coxas" data-price="R$ 12,90"
             style="left:53%;top:72.235%;width:20%;height:3%" aria-label="Comprar Pack Coxas"></button><button
-            class="hotspot buy" data-name="Pack Especial" data-price="R$ 21,90"
+            class="hotspot buy" data-product="especial" data-name="Pack Especial" data-price="R$ 21,90"
             style="left:77%;top:72.235%;width:20%;height:3%" aria-label="Comprar Pack Especial"></button><button
-            class="hotspot buy" data-name="Combo Completo" data-price="R$ 32,90"
+            class="hotspot buy" data-product="combo" data-name="Combo Completo" data-price="R$ 32,90"
             style="left:61%;top:89.809%;width:35%;height:3.4%"
             aria-label="Comprar Combo Completo por R$ 32,90"></button>
     </main>
@@ -186,11 +186,38 @@
         <div class="dialog">
             <h2 id="modal-title"></h2>
             <p id="modal-text"></p>
-            <p>O checkout ainda não foi configurado. Substitua a ação deste botão pelo link de pagamento correspondente
-                da Cakto.</p><button id="close">Fechar</button>
+            <p id="checkout-status">Os produtos estão sendo preparados. As compras serão liberadas após a entrega estar pronta.</p><button id="close">Fechar</button>
         </div>
     </div>
-    <script>const modal = document.getElementById('modal'); document.querySelectorAll('.buy').forEach(b => b.addEventListener('click', () => {document.getElementById('modal-title').textContent = b.dataset.name; document.getElementById('modal-text').textContent = 'Valor: ' + b.dataset.price; modal.classList.add('show')})); document.getElementById('close').onclick = () => modal.classList.remove('show'); modal.addEventListener('click', e => {if (e.target === modal) modal.classList.remove('show')}); document.addEventListener('keydown', e => {if (e.key === 'Escape') modal.classList.remove('show')});</script>
+    <script>
+const modal = document.getElementById('modal');
+const closeModal = () => modal.classList.remove('show');
+document.getElementById('close').onclick = closeModal;
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+let productConfig = null;
+async function loadProducts() {
+    const response = await fetch('/config/produto.json', {cache: 'no-store'});
+    if (!response.ok) throw new Error('Configuração comercial indisponível');
+    const data = await response.json();
+    if (!data || data.moeda !== 'BRL' || !data.produtos) throw new Error('Configuração comercial inválida');
+    productConfig = data;
+}
+loadProducts().catch(error => console.warn('Compras indisponíveis:', error.message));
+document.querySelectorAll('.buy').forEach(button => button.addEventListener('click', () => {
+    const product = productConfig?.produtos?.[button.dataset.product];
+    document.getElementById('modal-title').textContent = product?.nome || button.dataset.name;
+    document.getElementById('modal-text').textContent = 'Valor: ' + (product ? product.preco.toLocaleString('pt-BR', {style:'currency', currency:'BRL'}) : button.dataset.price);
+    const enabled = productConfig?.vendasHabilitadas === true;
+    const checkout = product?.checkoutUrl;
+    if (enabled && typeof checkout === 'string' && /^https:\/\/pay\.cakto\.com\.br\/[a-z0-9]+_\d+$/.test(checkout)) {
+        window.location.assign(checkout);
+        return;
+    }
+    document.getElementById('checkout-status').textContent = 'Produto em preparação. A compra será liberada após a entrega estar pronta.';
+    modal.classList.add('show');
+}));
+</script>
 </body>
 
 </html>
