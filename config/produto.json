@@ -1,0 +1,32 @@
+{
+  "nome": "Sarah's Collection",
+  "moeda": "BRL",
+  "vendasHabilitadas": false,
+  "produtos": {
+    "pes": {
+      "nome": "Pack Pés",
+      "preco": 9.9,
+      "checkoutUrl": "https://pay.cakto.com.br/jbpajsc_1298835"
+    },
+    "maos": {
+      "nome": "Pack Mãos",
+      "preco": 6.9,
+      "checkoutUrl": "https://pay.cakto.com.br/7pdyurr_1298850"
+    },
+    "coxas": {
+      "nome": "Pack Coxas",
+      "preco": 12.9,
+      "checkoutUrl": "https://pay.cakto.com.br/uyxw63d_1298861"
+    },
+    "especial": {
+      "nome": "Pack Especial",
+      "preco": 21.9,
+      "checkoutUrl": "https://pay.cakto.com.br/36dwvey_1298868"
+    },
+    "combo": {
+      "nome": "Combo Completo",
+      "preco": 32.9,
+      "checkoutUrl": "https://pay.cakto.com.br/3cxfavj_1298785"
+    }
+  }
+}
