@@ -1,7 +1,7 @@
 {
   "nome": "Sarah's Collection",
   "moeda": "BRL",
-  "vendasHabilitadas": false,
+  "vendasHabilitadas": true,
   "produtos": {
     "pes": {
       "nome": "Pack Pés",
