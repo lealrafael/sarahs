@@ -53,6 +53,39 @@
             background: #ff006911
         }
 
+
+        /* Botões de compra sobre a arte original: texto legível e clicável */
+        .hotspot.buy:not([data-product="combo"]) {
+            background: linear-gradient(180deg, #ff268d 0%, #f50073 52%, #c9005b 100%);
+            border: 1px solid #ff3e9b;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4em;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-weight: 900;
+            font-size: clamp(9px, 1.65vw, 17px);
+            letter-spacing: .045em;
+            white-space: nowrap;
+            box-shadow: inset 0 1px 2px #ffffff66, 0 0 13px #f5007355;
+            transition: filter .15s ease, transform .15s ease;
+        }
+        .hotspot.buy:not([data-product="combo"])::before {
+            content: "🛒";
+            font-size: 1.05em;
+            line-height: 1;
+        }
+        .hotspot.buy:not([data-product="combo"])::after {
+            content: "COMPRAR";
+        }
+        .hotspot.buy:not([data-product="combo"]):hover {
+            background: linear-gradient(180deg, #ff4ba4 0%, #ff007a 100%);
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
         .price-fix {
             position: absolute;
             left: 38.5%;
